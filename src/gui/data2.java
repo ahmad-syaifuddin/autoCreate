@@ -5,7 +5,7 @@
 package gui;
 
 import config.crud;
-import config.dynamic;
+import config.dynamicAll;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -24,7 +24,7 @@ int lebarKolom[]={250,200,210,200,200};
 String sql="SELECT * FROM tbl_data2";
 
 private crud cruddb;
-private dynamic formHandler;
+private dynamicAll formHandler;
     /**
      * Creates new form data2
      */
@@ -41,7 +41,7 @@ private dynamic formHandler;
     }
     
     private void initializeFormFields() {
-        formHandler = new dynamic();
+        formHandler = new dynamicAll();
         formHandler.addField("kode_barang", jTextField1);
         formHandler.addField("nama_barang", jTextField2);
         formHandler.addField("tanggal",jCalendarComboBox1);

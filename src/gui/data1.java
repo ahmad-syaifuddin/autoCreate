@@ -5,7 +5,7 @@
 package gui;
 
 import config.crud;
-import config.dynamic;
+import config.dynamicAll;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +22,7 @@ int lebarKolom[]={250,200,210,200,200,100};
 String sql="SELECT * FROM tbl_data";
 
 private crud cruddb;
-private dynamic formHandler;
+private dynamicAll formHandler;
     /**
      * Creates new form data1
      */
@@ -39,7 +39,7 @@ private dynamic formHandler;
     }
     
     private void initializeFormFields() {
-        formHandler = new dynamic();
+        formHandler = new dynamicAll();
         formHandler.addField("id", jTextField1);
         formHandler.addField("data_1", jTextField2);
         formHandler.addField("data_2", jTextField3);
