@@ -2,6 +2,7 @@ package config;
 import de.wannawork.jcalendar.JCalendarComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
 import javax.swing.JComboBox;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -33,6 +34,11 @@ public class dynamicAll {
         fieldMap.put(fieldName, component);
     }
     
+    // Menambahkan method untuk JFormattedTextField
+    public void addField(String fieldName, JFormattedTextField component) {
+        fieldMap.put(fieldName, component);
+    }
+    
     // Mendapatkan array nama field
     public String[] getFieldNames() {
         return fieldMap.keySet().toArray(new String[0]);
@@ -43,7 +49,24 @@ public class dynamicAll {
         return fieldMap.entrySet().stream()
             .map(entry -> {
                 Object component = entry.getValue();
-                if (component instanceof JTextField) {
+                if (component instanceof JFormattedTextField) {
+                    Object value = ((JFormattedTextField) component).getValue();
+                    // Handle nilai kosong
+                    if (value == null) {
+                        return "";
+                    }
+                    // Handle nilai date
+                    if (value instanceof Date) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        return sdf.format((Date) value);
+                    }
+                    // Handle nilai number
+                    if (value instanceof Number) {
+                        return value.toString();
+                    }
+                    // Handle nilai string dan lainnya
+                    return value.toString();
+                } else if (component instanceof JTextField) {
                     return ((JTextField) component).getText();
                 } else if (component instanceof JSpinner) {
                     return String.valueOf(((JSpinner) component).getValue());
@@ -65,7 +88,19 @@ public class dynamicAll {
         return fieldMap.entrySet().stream()
             .anyMatch(entry -> {
                 Object component = entry.getValue();
-                if (component instanceof JTextField) {
+                if (component instanceof JFormattedTextField) {
+                    JFormattedTextField formatted = (JFormattedTextField) component;
+                    Object value = formatted.getValue();
+                    if (value == null) {
+                        return true;
+                    }
+                    // Jika nilai adalah String, periksa apakah kosong
+                    if (value instanceof String) {
+                        return ((String) value).trim().isEmpty();
+                    }
+                    // Untuk tipe data lain, anggap tidak kosong jika ada nilainya
+                    return false;
+                } else if (component instanceof JTextField) {
                     return ((JTextField) component).getText().trim().isEmpty();
                 } else if (component instanceof JSpinner) {
                     return ((JSpinner) component).getValue() == null;

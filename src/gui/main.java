@@ -38,6 +38,8 @@ public class main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnData1 = new javax.swing.JButton();
         btnData2 = new javax.swing.JButton();
+        btnData3 = new javax.swing.JButton();
+        btnData4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +47,7 @@ public class main extends javax.swing.JFrame {
         jLabel1.setText("Halaman Utama Aplikasi");
 
         btnData1.setText("Data 1");
+        btnData1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnData1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnData1ActionPerformed(evt);
@@ -52,9 +55,26 @@ public class main extends javax.swing.JFrame {
         });
 
         btnData2.setText("Data 2");
+        btnData2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnData2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnData2ActionPerformed(evt);
+            }
+        });
+
+        btnData3.setText("Nota");
+        btnData3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnData3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnData3ActionPerformed(evt);
+            }
+        });
+
+        btnData4.setText("Bayar");
+        btnData4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnData4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnData4ActionPerformed(evt);
             }
         });
 
@@ -64,12 +84,17 @@ public class main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(118, 118, 118)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnData1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnData2)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnData3)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnData4))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnData1)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnData2))))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -77,11 +102,15 @@ public class main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addGap(109, 109, 109)
+                .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnData2)
                     .addComponent(btnData1))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnData3)
+                    .addComponent(btnData4))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         pack();
@@ -96,6 +125,16 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
         new data2().setVisible(true);
     }//GEN-LAST:event_btnData2ActionPerformed
+
+    private void btnData3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnData3ActionPerformed
+        // TODO add your handling code here:
+        new nota().setVisible(true);
+    }//GEN-LAST:event_btnData3ActionPerformed
+
+    private void btnData4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnData4ActionPerformed
+        // TODO add your handling code here:
+        new bayar().setVisible(true);
+    }//GEN-LAST:event_btnData4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,6 +174,8 @@ public class main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnData1;
     private javax.swing.JButton btnData2;
+    private javax.swing.JButton btnData3;
+    private javax.swing.JButton btnData4;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

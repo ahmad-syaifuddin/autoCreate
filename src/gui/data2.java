@@ -19,15 +19,31 @@ import java.util.Date;
  * @author User
  */
 public class data2 extends javax.swing.JFrame {
-String judulKolom[]={"Kode Barang","Nama Barang","Tanggal","Muatan","Jumlah"};
-int lebarKolom[]={250,200,210,200,200};
+String judulKolom[]={"Kode Barang","Nama Barang","Tanggal","Muatan","Jumlah","Tersedia"};
+int lebarKolom[]={250,200,210,200,200,200};
 String sql="SELECT * FROM tbl_data2";
 
-private crud cruddb;
+private final crud cruddb;
 private dynamicAll formHandler;
     /**
      * Creates new form data2
      */
+
+    private void initializeFormFields() {
+        formHandler = new dynamicAll();
+        formHandler.addField("kode_barang", jTextField1);
+        formHandler.addField("nama_barang", jTextField2);
+        formHandler.addField("tanggal",jCalendarComboBox1);
+        formHandler.addField("muatan",jTextField3);
+        formHandler.addField("jumlah", jSpinner1);
+        formHandler.addField("tersedia", jComboBox1);
+    }
+        private void loaddata(){
+        cruddb.settingJudulTabel(jTable1, judulKolom);
+        cruddb.settingLebarKolom(jTable1, lebarKolom);
+        cruddb.tampilTabel(jTable1, sql, judulKolom);
+    } 
+
     public data2() {
         initComponents();
         
@@ -40,18 +56,7 @@ private dynamicAll formHandler;
         loaddata();
     }
     
-    private void initializeFormFields() {
-        formHandler = new dynamicAll();
-        formHandler.addField("kode_barang", jTextField1);
-        formHandler.addField("nama_barang", jTextField2);
-        formHandler.addField("tanggal",jCalendarComboBox1);
-        formHandler.addField("muatan",jTextField3);
-        formHandler.addField("jumlah", jSpinner1);
-    }
-        void loaddata(){
-        cruddb.settingJudulTabel(jTable1, judulKolom);
-        cruddb.settingLebarKolom(jTable1, lebarKolom);
-        cruddb.tampilTabel(jTable1, sql, judulKolom);}
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +85,8 @@ private dynamicAll formHandler;
         jSpinner1 = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,6 +114,7 @@ private dynamicAll formHandler;
         btnCetak.setBackground(new java.awt.Color(255, 255, 102));
         btnCetak.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCetak.setText("Cetak");
+        btnCetak.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCetak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCetakActionPerformed(evt);
@@ -116,6 +124,7 @@ private dynamicAll formHandler;
         btnSimpan.setBackground(new java.awt.Color(102, 255, 102));
         btnSimpan.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSimpan.setText("Simpan");
+        btnSimpan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
@@ -125,6 +134,7 @@ private dynamicAll formHandler;
         btnUbah.setBackground(new java.awt.Color(102, 153, 255));
         btnUbah.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUbah.setText("Ubah");
+        btnUbah.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUbahActionPerformed(evt);
@@ -134,6 +144,7 @@ private dynamicAll formHandler;
         btnHapus.setBackground(new java.awt.Color(255, 102, 102));
         btnHapus.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHapus.setText("Hapus");
+        btnHapus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHapusActionPerformed(evt);
@@ -142,6 +153,7 @@ private dynamicAll formHandler;
 
         btnBersih.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBersih.setText("Bersih");
+        btnBersih.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBersih.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBersihActionPerformed(evt);
@@ -158,6 +170,10 @@ private dynamicAll formHandler;
 
         jLabel6.setText("Muatan");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ya", "Tidak" }));
+
+        jLabel7.setText("Tersedia");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,9 +186,23 @@ private dynamicAll formHandler;
                 .addGap(76, 76, 76)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jCalendarComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jSpinner1)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jTextField3)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 39, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,19 +214,7 @@ private dynamicAll formHandler;
                                         .addComponent(btnBersih, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(28, 28, 28)
                                         .addComponent(btnCetak, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(55, 55, 55))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(jCalendarComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING))))
+                                        .addGap(55, 55, 55)))))
                         .addGap(91, 91, 91))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -236,7 +254,11 @@ private dynamicAll formHandler;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnSimpan, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUbah, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,7 +285,6 @@ private dynamicAll formHandler;
     }//GEN-LAST:event_btnCetakActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        // TODO add your handling code here:
         // Mendapatkan fields dan values secara dinamis
         String[] fields = formHandler.getFieldNames();
         String[] values = formHandler.getFieldValues();
@@ -285,7 +306,6 @@ private dynamicAll formHandler;
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        // TODO add your handling code here:
         String[] fields = formHandler.getFieldNames();
         String[] values = formHandler.getFieldValues();
 
@@ -319,14 +339,15 @@ private dynamicAll formHandler;
     }//GEN-LAST:event_btnBersihActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-         try {
+        try {
         int baris = jTable1.getSelectedRow();
         
         // Set text fields
-        jTextField1.setText(jTable1.getValueAt(baris, 0).toString());
-        jTextField2.setText(jTable1.getValueAt(baris, 1).toString());
-        jTextField3.setText(jTable1.getValueAt(baris, 3).toString());
-        
+        jTextField1.setText(jTable1.getValueAt(baris, 0).toString()); // id barang
+        jTextField2.setText(jTable1.getValueAt(baris, 1).toString()); // nama barang
+        jTextField3.setText(jTable1.getValueAt(baris, 3).toString()); // muatan
+        jComboBox1.setSelectedItem(jTable1.getValueAt(baris, 5).toString());
+
         // Handle date for JCalendarComboBox
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -396,12 +417,14 @@ private dynamicAll formHandler;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnUbah;
     private de.wannawork.jcalendar.JCalendarComboBox jCalendarComboBox1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
@@ -410,7 +433,7 @@ private dynamicAll formHandler;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 
-// Method Dinamis Bersih Inputan Form
+    // Method Dinamis Bersih Inputan Form
     private void bersihForm() {
     // Iterasi melalui semua komponen di content pane
     for (java.awt.Component component : this.getContentPane().getComponents()) {
